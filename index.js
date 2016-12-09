@@ -4,7 +4,6 @@
 
 function ip(conf) {
     var MSG="非法ip";
-    var PROXY="X-Real-IP";
     if (typeof conf !== 'object') {
         if (typeof conf === 'string') {
             conf = {whiteList: [conf]};
@@ -18,8 +17,7 @@ function ip(conf) {
     }
     return function* (next) {
         var _this=this;
-        var tempReq=_this.request;
-        var _ip = tempReq.get(conf.proxy||PROXY) || tempReq.get("X-Forwarded-For")||_this.ip;
+        var _ip = typeof conf.proxy === 'function' ? conf.proxy.call(_this, _this) : this.ip;
         var pass = false;
         if (conf.whiteList && Array.isArray(conf.whiteList)) {
             pass = conf.whiteList.some(function (item) {

@@ -1,6 +1,6 @@
 {
   "name": "koajs-ip",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "koajs middleware cors",
   "main": "index.js",
   "scripts": {
